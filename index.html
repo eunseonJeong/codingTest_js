@@ -7,18 +7,16 @@
     <script>
       function solution(arr) {
         let answer = [];
-        let sum = 0; //홀수들의 합
-        let min = 1000; // 최솟값
-        arr.forEach((num) => {
-          sum += num;
-        });
-        min = Math.min(...arr);
-        answer.push(sum);
-        answer.push(min);
+        answer.push(arr[0]);
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > arr[i - 1]) answer.push(arr[i]);
+        }
+
         return answer;
       }
 
-      arr = [12, 77, 38, 41, 53, 92, 85];
+      let arr = [7, 3, 9, 5, 6, 12];
+
       console.log(solution(arr));
     </script>
   </body>
