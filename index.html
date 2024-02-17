@@ -6,24 +6,24 @@
   <body>
     <script>
       function solution(s) {
-        stack = [];
-        //스택에 괄호가 남아있으면 NO, 빈 값이면 YES
+        let answer = "";
+        let stack = [];
+
         for (let i = 0; i < s.length; i++) {
+          //pop을 사용해서 괄호안에 문자열 제거
           if (s[i] === "(") {
-            stack.push("x");
+            stack.push(i);
           } else if (s[i] === ")") {
             stack.pop();
+          } else {
+            if (stack.length === 0) answer += s[i];
           }
         }
-        if (stack.length !== 0) {
-          return "NO";
-        } else {
-          return "YES";
-        }
-      }
 
-      let a = "()";
-      console.log(solution(a));
+        return answer;
+      }
+      let str = "(A(BC)D)EF(G(H)(IJ)K)L(N)";
+      console.log(solution(str));
     </script>
   </body>
 </html>
