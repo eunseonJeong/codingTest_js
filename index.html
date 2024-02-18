@@ -5,25 +5,23 @@
   </head>
   <body>
     <script>
-      function solution(s) {
-        let answer = "";
-        let stack = [];
+      function solution(n, k) {
+        let answer;
+        let queue = Array.from({ length: n }, (v, i) => i + 1);
 
-        for (let i = 0; i < s.length; i++) {
-          //pop을 사용해서 괄호안에 문자열 제거
-          if (s[i] === "(") {
-            stack.push(i);
-          } else if (s[i] === ")") {
-            stack.pop();
-          } else {
-            if (stack.length === 0) answer += s[i];
+        // 넣을 때는 push, 뺄 때는 shift
+        while (queue.length > 1) {
+          for (let i = 1; i < k; i++) {
+            queue.push(queue.shift());
           }
+          queue.shift();
         }
 
+        answer = queue[0];
         return answer;
       }
-      let str = "(A(BC)D)EF(G(H)(IJ)K)L(N)";
-      console.log(solution(str));
+
+      console.log(solution(8, 3));
     </script>
   </body>
 </html>
