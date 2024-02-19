@@ -5,23 +5,30 @@
   </head>
   <body>
     <script>
-      function solution(n, k) {
-        let answer;
-        let queue = Array.from({ length: n }, (v, i) => i + 1);
+      function solution(s) {
+        let answer = new Map();
 
-        // 넣을 때는 push, 뺄 때는 shift
-        while (queue.length > 1) {
-          for (let i = 1; i < k; i++) {
-            queue.push(queue.shift());
+        for (let i = 0; i < s.length; i++) {
+          let char = s[i];
+          if (answer.has(char)) {
+            answer.set(char, answer.get(char) + 1);
+          } else {
+            answer.set(char, 1);
           }
-          queue.shift();
         }
-
-        answer = queue[0];
-        return answer;
+        let maxKey;
+        let maxValue = -1;
+        answer.forEach((value, key) => {
+          if (value > maxValue) {
+            maxValue = value;
+            maxKey = key;
+          }
+        });
+        return maxKey;
       }
 
-      console.log(solution(8, 3));
+      let str = "BACBACCACCBDEDE";
+      console.log(solution(str));
     </script>
   </body>
 </html>
